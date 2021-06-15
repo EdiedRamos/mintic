@@ -1,0 +1,19 @@
+{
+    "clientes": [
+        {
+            "nombre": "edied",
+            "apellido": "ramos",
+            "edad": 21
+        },
+        {
+            "nombre": "enrique",
+            "apellido": "pastor",
+            "edad": 60
+        },
+        {
+            "nombre": "antonio",
+            "apellido": "recio",
+            "edad": 62
+        }
+    ]
+}
