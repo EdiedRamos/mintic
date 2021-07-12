@@ -27,8 +27,8 @@ public class CalcularInversion {
     
     public Double compararInversion(Integer tiempo, Integer capital, Integer interes) {
         setTiempo(tiempo);
-        setCapital(Double.parseDouble(String.valueOf(capital)));
-        setInteres(Double.parseDouble(String.valueOf(interes)));
+        setCapital(Double.valueOf(capital));
+        setInteres(Double.valueOf(interes));
         Double cal = calcularInteresCompuesto() - calcularInteresSimple();
         return Double.valueOf(Math.round(cal));
     }
@@ -38,7 +38,7 @@ public class CalcularInversion {
         return Double.valueOf(Math.round(cal));
     }
     
-        private void setTiempo(Integer tiempo) {
+    private void setTiempo(Integer tiempo) {
         this.tiempo = tiempo;
     }
     
