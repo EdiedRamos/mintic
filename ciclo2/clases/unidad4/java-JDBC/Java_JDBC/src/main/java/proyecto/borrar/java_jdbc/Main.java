@@ -25,7 +25,7 @@ public class Main {
             
             Statement sentencia = conexion.createStatement();
             
-            // Ejercutar sql
+            // Ejecutar sql
             
             ResultSet respuesta = sentencia.executeQuery("SELECT DISTINCT POBLACIÓN FROM CLIENTES");
             
