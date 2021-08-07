@@ -1,0 +1,246 @@
+/*
+ * Pueda usar esta plantilla para la carga del reto a iMaster
+ * Copie las clases de los paquetes Modelo, Vista, Controlador y Util
+ * No incluya los import de los archivos .java solo las clases
+ */
+// Importaciones necesarias en iMaster
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+// Util (No modificar)
+class JDBCUtilities {
+    private static final String DATABASE_LOCATION = "ProyectosConstruccion.db";
+
+    public static Connection getConnection() throws SQLException {
+        String url = "jdbc:sqlite:"+DATABASE_LOCATION;
+
+        return DriverManager.getConnection(url);
+    }
+}
+
+// Remplace en adelante por las clases de sus archivos .java
+
+// Vista
+class VistaRequerimientos {
+
+    public static final ControladorRequerimientos controlador = new ControladorRequerimientos();
+
+    public static void requerimiento1(){
+        try {
+            for (Requerimiento_1 r : controlador.consultarRequerimiento1()) {
+                System.out.println(r.getLider() + " " + r.getCargo() + " " + r.getProyectos());
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    public static void requerimiento2(){
+        try {
+            for (Requerimiento_2 r : controlador.consultarRequerimiento2()) {
+                System.out.println(r.get_id_material() + " " + r.get_nombre_material() + " " + r.get_cantidad() + " " + r.get_precio_unidad() + " " + r.get_precio_total());
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    public static void requerimiento3(){
+        try {
+            for (Requerimiento_3 r : controlador.consultarRequerimiento3()) {
+                System.out.println(r.get_id_proyecto() + " " + r.get_ciudad() + " " + r.get_clasificacion() + " " + r.get_costo_proyecto());
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    
+}
+
+
+// Controlador
+class ControladorRequerimientos {
+    private Requerimiento_1Dao r1d;
+    private Requerimiento_2Dao r2d;
+    private Requerimiento_3Dao r3d;
+    
+    public ArrayList<Requerimiento_1> consultarRequerimiento1() throws SQLException {
+        r1d = new Requerimiento_1Dao();
+        return r1d.requerimiento1();
+    }
+
+    public ArrayList<Requerimiento_2> consultarRequerimiento2() throws SQLException {
+        r2d = new Requerimiento_2Dao();
+        return r2d.requerimiento2();
+    }
+
+    public ArrayList<Requerimiento_3> consultarRequerimiento3() throws SQLException {
+        r3d = new Requerimiento_3Dao();
+        return r3d.requerimiento3();
+    }
+}
+
+// Modelo
+// VO
+class Requerimiento_1 {
+    private String lider;
+    private String cargo;
+    private int proyectos;
+    
+    public Requerimiento_1(String lider, String cargo, int proyectos) {
+        this.lider = lider;
+        this.cargo = cargo;
+        this.proyectos = proyectos;
+    }
+    
+    public String getLider() {
+        return this.lider;
+    }
+    
+    public String getCargo() {
+        return this.cargo;
+    }
+    
+    public int getProyectos() {
+        return this.proyectos;
+    }
+}
+
+class Requerimiento_2 {
+    private int id_material;
+    private String nombre_material;
+    private int cantidad;
+    private int precio_unidad;
+    private int precio_total;
+    
+    public Requerimiento_2(int id_material, String nombre_material, int cantidad, int precio_unidad, int precio_total) {
+        this.id_material = id_material;
+        this.nombre_material = nombre_material;
+        this.cantidad = cantidad;
+        this.precio_unidad = precio_unidad;
+        this.precio_total = precio_total;
+    }
+    
+    public int get_id_material() {
+        return this.id_material;
+    }
+    
+    public String get_nombre_material() {
+        return this.nombre_material;
+    }
+    
+    public int get_cantidad() {
+        return this.cantidad;
+    }
+    
+    public int get_precio_unidad() {
+        return this.precio_unidad;
+    }
+    
+    public int get_precio_total() {
+        return this.precio_total;
+    }
+}
+
+
+class Requerimiento_3 {
+    private int id_proyecto;
+    private String ciudad;
+    private String clasificacion;
+    private int costo_proyecto;
+    
+    public Requerimiento_3(int id_proyecto, String ciudad, String clasificacion, int costo_proyecto) {
+        this.id_proyecto = id_proyecto;
+        this.ciudad = ciudad;
+        this.clasificacion = clasificacion;
+        this.costo_proyecto = costo_proyecto;
+    }
+    
+    public int get_id_proyecto() {
+        return this.id_proyecto;
+    }
+    
+    public String get_ciudad() {
+        return this.ciudad;
+    }
+    
+    public String get_clasificacion() {
+        return this.clasificacion;
+    }
+    
+    public int get_costo_proyecto() {
+        return this.costo_proyecto;
+    }
+}
+
+
+// DAO
+class Requerimiento_1Dao {
+    public ArrayList<Requerimiento_1> requerimiento1() throws SQLException {
+        ArrayList<Requerimiento_1> lista = new ArrayList<>();
+        String sql = "select l.Nombre || ' ' || l.Primer_Apellido as Lider, l.Cargo, count(l.ID_Lider) as [# Proyectos] from Proyecto as p, Lider as l where p.ID_Lider = l.ID_Lider and p.Constructora = 'Pegaso' group by l.ID_Lider order by l.Cargo, Lider;";
+        try (
+            Connection con = JDBCUtilities.getConnection();
+            Statement st = con.createStatement();
+        ) {
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                lista.add(new Requerimiento_1(
+                    rs.getString("Lider"),
+                    rs.getString("Cargo"),
+                    rs.getInt("# Proyectos")
+                ));
+            }
+        }
+        return lista;
+    }
+}
+
+class Requerimiento_2Dao {
+    public ArrayList<Requerimiento_2> requerimiento2() throws SQLException {
+        ArrayList<Requerimiento_2> lista = new ArrayList<>();
+        String sql = "select mc.ID_MaterialConstruccion, mc.Nombre_Material, c.Cantidad, mc.Precio_Unidad, c.Cantidad * mc.Precio_Unidad as Precio_Total from Compra c, MaterialConstruccion mc, Proyecto p where c.ID_Proyecto = p.ID_Proyecto and mc.ID_MaterialConstruccion = c.ID_MaterialConstruccion and (p.ID_Proyecto in (14, 20, 18, 36, 45, 48, 56)) order by p.ID_Proyecto, mc.Precio_Unidad desc;";
+        try (
+            Connection cnt = JDBCUtilities.getConnection();
+            Statement st = cnt.createStatement();
+        ) {
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                lista.add(new Requerimiento_2(
+                    rs.getInt("ID_MaterialConstruccion"),
+                    rs.getString("Nombre_Material"),
+                    rs.getInt("Cantidad"),
+                    rs.getInt("Precio_Unidad"),
+                    rs.getInt("Precio_Total")
+                ));
+            }
+        }
+        return lista;
+    }
+}
+
+class Requerimiento_3Dao {
+    public ArrayList<Requerimiento_3> requerimiento3() throws SQLException {
+        ArrayList<Requerimiento_3> lista = new ArrayList<>();
+        String sql = "select p.ID_Proyecto, p.Ciudad, p.Clasificacion, sum(c.Cantidad * mc.Precio_Unidad) Costo_Proyecto from Proyecto p, Compra c, MaterialConstruccion mc where p.ID_Proyecto = c.ID_Proyecto and c.ID_MaterialConstruccion = mc.ID_MaterialConstruccion and p.Ciudad in ('Sta. Rosa de Cabal', 'Pereira') group by p.ID_Proyecto having Costo_Proyecto > 87000 order by p.Ciudad, p.Clasificacion;";
+        try (
+            Connection cnt = JDBCUtilities.getConnection();
+            Statement st = cnt.createStatement();
+        ) {
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                lista.add(new Requerimiento_3(
+                    rs.getInt("ID_Proyecto"),
+                    rs.getString("Ciudad"),
+                    rs.getString("Clasificacion"),
+                    rs.getInt("Costo_Proyecto")
+                ));
+            }
+        }
+        return lista;
+    }
+}
