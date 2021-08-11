@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import practica.reto5.controlador.ControladorRequerimientos;
 import practica.reto5.modelo.vo.*;
@@ -28,8 +27,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
     private Color azul;
     private Color morado;
     private Color cyan;
-    private Color gris;
-    
+
     /**
      * Creates new form RequerimientosGUI
      */
@@ -45,7 +43,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
     private void settings() {
         // contenedor
         setLocationRelativeTo(null);
-        
+
         // creando los colores
         negro = new Color(40, 44, 52);
         rojo = new Color(224, 108, 117);
@@ -54,30 +52,29 @@ public class RequerimientosGUI extends javax.swing.JFrame {
         azul = new Color(97, 175, 239);
         morado = new Color(198, 120, 221);
         cyan = new Color(86, 182, 194);
-        gris = new Color(171, 178, 191);
-        
+
         // configurando las opciones
         opciones.setForeground(negro);
         opciones.setBackground(rojo);
         opciones.setBorder(BorderFactory.createLineBorder(morado));
-        
+
         // configurando la tabla
         tabla.setBackground(negro);
         tabla.setForeground(amarillo);
         tabla.getTableHeader().setBackground(verde);
         tabla.getTableHeader().setForeground(negro);
-        tabla.getTableHeader().setFont(new Font("verdana", Font.BOLD, 12));
+        tabla.getTableHeader().setFont(new Font("verdana", Font.BOLD, 13));
         tabla.setSelectionBackground(azul);
         tabla.setSelectionForeground(negro);
-        
+
         // configurando al jscroll
         jScrollPane1.getViewport().setBackground(negro);
         jScrollPane1.setBorder(BorderFactory.createLineBorder(morado));
         jScrollPane1.setOpaque(false);
-        
+
         // configurando el pie de pagina
         derechos.setForeground(cyan);
-        derechos.setHorizontalAlignment((int)CENTER_ALIGNMENT);
+        derechos.setHorizontalAlignment((int) CENTER_ALIGNMENT);
     }
 
     /**
@@ -102,7 +99,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(40, 44, 52));
 
-        opciones.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        opciones.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         opciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE EL REQUERIMIENTO", "REQUERIMIENTO 1", "REQUERIMIENTO 2", "REQUERIMIENTO 3" }));
         opciones.setToolTipText("ESCOJA EL REQUERIMIENTO");
         opciones.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +108,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
             }
         });
 
-        tabla.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        tabla.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -123,7 +120,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
         tabla.setRowHeight(25);
         jScrollPane1.setViewportView(tabla);
 
-        derechos.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        derechos.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
         derechos.setText("DESARROLLADO POR EDIED ISAÍAS RAMOS HERNÁNDEZ");
         derechos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -223,7 +220,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
                     matriz_tabla[i][2] = lista.get(i).get_clasificacion();
                     matriz_tabla[i][3] = lista.get(i).get_costo_proyecto() + "";
                 }
-                tabla.setModel(new DefaultTableModel(matriz_tabla, new String[] {"ID PROYECTO", "CIUDAD", "CLASIFICACION", "COSTO PROYECTO"}));
+                tabla.setModel(new DefaultTableModel(matriz_tabla, new String[]{"ID PROYECTO", "CIUDAD", "CLASIFICACION", "COSTO PROYECTO"}));
             } catch (Exception e) {
             }
 
