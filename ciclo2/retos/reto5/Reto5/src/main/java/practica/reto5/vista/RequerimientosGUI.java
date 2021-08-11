@@ -56,7 +56,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
         // configurando las opciones
         opciones.setForeground(negro);
         opciones.setBackground(rojo);
-        opciones.setBorder(BorderFactory.createLineBorder(morado));
+        opciones.setBorder(BorderFactory.createLineBorder(morado, 2));
 
         // configurando la tabla
         tabla.setBackground(negro);
@@ -69,7 +69,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
 
         // configurando al jscroll
         jScrollPane1.getViewport().setBackground(negro);
-        jScrollPane1.setBorder(BorderFactory.createLineBorder(morado));
+        jScrollPane1.setBorder(BorderFactory.createLineBorder(morado, 2));
         jScrollPane1.setOpaque(false);
 
         // configurando el pie de pagina
@@ -95,9 +95,9 @@ public class RequerimientosGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RETO 5");
         setBackground(new java.awt.Color(204, 0, 0));
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(40, 44, 52));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         opciones.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         opciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE EL REQUERIMIENTO", "REQUERIMIENTO 1", "REQUERIMIENTO 2", "REQUERIMIENTO 3" }));
@@ -107,6 +107,7 @@ public class RequerimientosGUI extends javax.swing.JFrame {
                 opcionesActionPerformed(evt);
             }
         });
+        jPanel1.add(opciones, java.awt.BorderLayout.PAGE_START);
 
         tabla.setFont(new java.awt.Font("Verdana", 0, 15)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -120,7 +121,9 @@ public class RequerimientosGUI extends javax.swing.JFrame {
         tabla.setRowHeight(25);
         jScrollPane1.setViewportView(tabla);
 
-        derechos.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        derechos.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         derechos.setText("DESARROLLADO POR EDIED ISAÍAS RAMOS HERNÁNDEZ");
         derechos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -130,39 +133,13 @@ public class RequerimientosGUI extends javax.swing.JFrame {
                 derechosMouseExited(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(opciones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addComponent(derechos)
-                .addContainerGap(205, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(opciones, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(derechos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(derechos, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
